@@ -50,12 +50,12 @@ def login():
                 "password": password
             })
             
-            # Guardar información de sesión
+            
             session['user_id'] = response.user.id
             session['email'] = email
             
             if remember:
-                # Configurar sesión permanente
+                
                 session.permanent = True
             
             flash('¡Bienvenido de vuelta!', 'success')
@@ -82,7 +82,7 @@ def register():
         
         print(f"Intentando registrar email: {email}")  # Debug
         
-        # Validaciones
+        
         if not email or not password or not confirm_password:
             flash('Por favor completa todos los campos', 'error')
             return redirect(url_for('register'))
@@ -93,7 +93,7 @@ def register():
             
         try:
             print("Iniciando registro en Supabase...")
-            # Registrar usuario en Supabase
+            
             response = supabase_client.auth.sign_up({
                 "email": email,
                 "password": password
@@ -103,7 +103,7 @@ def register():
             
             if hasattr(response, 'user') and response.user:
                 try:
-                    # Intentar crear el perfil
+                    
                     profile_data = {
                         "id": response.user.id,
                         "email": email,
@@ -131,6 +131,6 @@ def register():
             
     return render_template('register.html')
 
-# No importes las rutas aquí 
+
 
 print("Flask inicializado correctamente") 
