@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WatchLike</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="all">
+        <nav class="navbar">
+            <div class="logo">WatchLike</div>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Buscar películas...">
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('login') }}" class="login-btn">Iniciar sesión</a>
+                <a href="{{ url_for('register') }}" class="register-btn">Crear cuenta</a>
+            </div>
+        </nav>
+
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Tu próxima película favorita está aquí</h1>
+                <p>Realiza un seguimiento de las películas que ves.<br>
+                   Guarda las que quieres ver después.<br>
+                   Comparte tus opiniones con amigos.</p>
+                <a href="{{ url_for('register') }}" class="cta-button">Únete gratis</a>
+            </div>
+            <div class="featured-movies">
+                <div class="movie-card">
+                    <i class="fas fa-film movie-icon"></i>
+                    <h3>Películas Populares</h3>
+                </div>
+                <div class="movie-card">
+                    <i class="fas fa-star movie-icon"></i>
+                    <h3>Mejor Valoradas</h3>
+                </div>
+                <div class="movie-card">
+                    <i class="fas fa-clock movie-icon"></i>
+                    <h3>Próximos Estrenos</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-list-ul"></i>
+                <h2>Crea tus listas</h2>
+                <p>Organiza tus películas en listas personalizadas</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-users"></i>
+                <h2>Conecta con amigos</h2>
+                <p>Comparte recomendaciones y opiniones</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-chart-line"></i>
+                <h2>Sigue tus estadísticas</h2>
+                <p>Analiza tus géneros y directores favoritos</p>
+            </div>
+        </div>
+
+        <div class="movies-section">
+            <h2>Películas Populares</h2>
+            <div class="movie-carousel">
+                <button class="carousel-button prev">❮</button>
+                <div class="movie-row">
+                    <div class="movie-item">
+                        <img src="https://image.tmdb.org/t/p/w500/rktDFPbfHfUbArZ6OOOKsXcv0Bm.jpg" alt="Película 1">
+                        <div class="movie-info">
+                            <h3>The Batman</h3>
+                            <p>⭐ 8.2/10</p>
+                        </div>
+                    </div>
+                    <div class="movie-item">
+                        <img src="https://image.tmdb.org/t/p/w500/uJYYizSuA9Y3DCs0qS4qWvHfZg4.jpg" alt="Película 2">
+                        <div class="movie-info">
+                            <h3>Spider-Man</h3>
+                            <p>⭐ 8.4/10</p>
+                        </div>
+                    </div>
+                    <div class="movie-item">
+                        <img src="https://image.tmdb.org/t/p/w500/kAVRgw7GgK1CfYEJq8ME6EvRIgU.jpg" alt="Película 3">
+                        <div class="movie-info">
+                            <h3>Jurassic World</h3>
+                            <p>⭐ 7.8/10</p>
+                        </div>
+                    </div>
+                    <div class="movie-item">
+                        <img src="https://image.tmdb.org/t/p/w500/wRnbWt44nKjsFPrqSmwYki5vZtF.jpg" alt="Película 4">
+                        <div class="movie-info">
+                            <h3>Doctor Strange</h3>
+                            <p>⭐ 8.0/10</p>
+                        </div>
+                    </div>
+                    <div class="movie-item">
+                        <img src="https://image.tmdb.org/t/p/w500/kb4s0ML0iVZlG6wAKbbs9NAm6X.jpg" alt="Película 5">
+                        <div class="movie-info">
+                            <h3>Black Panther</h3>
+                            <p>⭐ 8.6/10</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-button next">❯</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/carousel.js') }}"></script>
+</body>
+</html>
+
