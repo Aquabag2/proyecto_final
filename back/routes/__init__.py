@@ -96,41 +96,21 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
         
-        print(f"Intentando login con email: {email}")
-        
         try:
-            # Primero verificar si el usuario existe
-            user_response = supabase_client.auth.admin.list_users()
-            print("Usuarios existentes:", [u.email for u in user_response])
-            
-            # Intentar login
+            # Simplificado: solo login y redirección
             auth_response = supabase_client.auth.sign_in_with_password({
                 "email": email,
                 "password": password
             })
             
             if auth_response.user:
-                session['user_id'] = auth_response.user.id
                 session['email'] = email
-                session['role'] = 'user'  # Por defecto
-                
-                # Obtener el perfil con el nombre
-                profile = supabase_client.table('profiles')\
-                    .select('*')\
-                    .eq('id', auth_response.user.id)\
-                    .execute()
-                
-                if profile.data:
-                    session['name'] = profile.data[0].get('name')
-                    session['role'] = profile.data[0].get('role', 'user')
-                
-                if session.get('role') == 'moderator':
-                    return redirect(url_for('moderator_dashboard'))
+                session['user_id'] = auth_response.user.id
                 return redirect(url_for('user_dashboard'))
                 
         except Exception as e:
-            print(f"Error detallado en login: {str(e)}")
-            flash('Usuario o contraseña incorrectos', 'error')
+            print(f"Error: {str(e)}")
+            flash('Error en login', 'error')
             
     return render_template('login.html')
 
@@ -181,57 +161,7 @@ def register():
 def user_dashboard():
     if 'email' not in session:
         return redirect(url_for('login'))
-    
-    genres = []
-    genre_ids = [
-        {"id": 28, "name": "Acción"},
-        {"id": 27, "name": "Terror"},
-        {"id": 35, "name": "Comedia"},
-        {"id": 18, "name": "Drama"},
-        {"id": 878, "name": "Ciencia ficción"}
-    ]
-    
-    for genre in genre_ids:
-        try:
-            # Obtener películas por género
-            response = requests.get(
-                f"{TMDB_BASE_URL}/discover/movie",
-                params={
-                    "api_key": app.config['TMDB_API_KEY'],
-                    "with_genres": genre["id"],
-                    "language": "es-ES",
-                    "sort_by": "popularity.desc",
-                    "page": 1
-                }
-            )
-            
-            if response.status_code == 200:
-                movies_data = response.json()["results"]
-                movies = []
-                
-                for movie in movies_data[:10]:  # Limitamos a 10 películas por género
-                    if movie.get('poster_path'):  # Solo incluir películas con póster
-                        movies.append({
-                            "id": movie["id"],
-                            "title": movie["title"],
-                            "poster_url": f"{TMDB_IMAGE_BASE_URL}{movie['poster_path']}",
-                            "rating": round(movie["vote_average"], 1),
-                            "overview": movie["overview"]
-                        })
-                
-                if movies:  # Solo agregar géneros que tengan películas
-                    genres.append({
-                        "name": genre["name"],
-                        "movies": movies
-                    })
-                    
-        except Exception as e:
-            print(f"Error fetching {genre['name']} movies: {str(e)}")
-            continue
-    
-    return render_template('user_dashboard.html', 
-                         user={'email': session['email']},
-                         genres=genres)
+    return render_template('user_dashboard.html')
 
 @app.route('/moderator-dashboard')
 def moderator_dashboard():

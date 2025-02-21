@@ -1,0 +1,75 @@
+# Esquema Entidad-Relación WatchLike
+
+## Entidades
+
+### Users (Usuarios)
+- id: UUID (PK)
+- email: string
+- name: string
+- role: string (user/moderator)
+- created_at: timestamp
+
+### Movies (Películas)
+- id: integer (PK)
+- tmdb_id: integer
+- title: string
+- overview: text
+- poster_url: string
+- rating: float
+- release_date: date
+- created_at: timestamp
+
+### Genres (Géneros)
+- id: integer (PK)
+- name: string
+- created_at: timestamp
+
+### Reviews (Reseñas)
+- id: UUID (PK)
+- user_id: UUID (FK -> Users)
+- movie_id: integer (FK -> Movies)
+- rating: float
+- comment: text
+- created_at: timestamp
+
+### Favorites (Favoritos)
+- id: UUID (PK)
+- user_id: UUID (FK -> Users)
+- movie_id: integer (FK -> Movies)
+- created_at: timestamp
+
+### Watchlist (Lista de reproducción)
+- id: UUID (PK)
+- user_id: UUID (FK -> Users)
+- movie_id: integer (FK -> Movies)
+- created_at: timestamp
+
+### MovieGenres (Relación Películas-Géneros)
+- movie_id: integer (FK -> Movies)
+- genre_id: integer (FK -> Genres)
+- created_at: timestamp
+
+## Relaciones
+
+1. Users - Reviews (1:N)
+   - Un usuario puede hacer muchas reseñas
+   - Una reseña pertenece a un usuario
+
+2. Users - Favorites (1:N)
+   - Un usuario puede tener muchas películas favoritas
+   - Una película favorita pertenece a un usuario
+
+3. Users - Watchlist (1:N)
+   - Un usuario puede tener muchas películas en su watchlist
+   - Una película en watchlist pertenece a un usuario
+
+4. Movies - Reviews (1:N)
+   - Una película puede tener muchas reseñas
+   - Una reseña pertenece a una película
+
+5. Movies - Genres (N:M)
+   - Una película puede tener múltiples géneros
+   - Un género puede tener múltiples películas
+   - Relación manejada por la tabla MovieGenres
+
+
