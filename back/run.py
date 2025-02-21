@@ -7,5 +7,5 @@ if __name__ == '__main__':
     print("Conexión con Supabase exitosa")
     print("Flask inicializado correctamente")
     print("Iniciando servidor Flask...")
-    port = int(os.environ.get('PORT', 5001))
+    port = int(os.environ.get('PORT', 5002))
     app.run(debug=True, port=port) 

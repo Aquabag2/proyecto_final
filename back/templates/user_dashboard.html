@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - WatchLike</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Swiper CSS para el carrusel -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+</head>
+<body>
+    <div class="dashboard">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>WatchLike</h2>
+                <span class="user-email">{{ session.email }}</span>
+            </div>
+            <ul class="nav-links">
+                <li class="active">
+                    <a href="#"><i class="fas fa-home"></i> Inicio</a>
+                </li>
+                <li>
+                    <a href="#generos"><i class="fas fa-film"></i> Géneros</a>
+                </li>
+                <li>
+                    <a href="#favoritos"><i class="fas fa-heart"></i> Favoritos</a>
+                </li>
+                <li>
+                    <a href="#watchlist"><i class="fas fa-list"></i> Watchlist</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <header class="content-header">
+                <h1>Bienvenido a WatchLike</h1>
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar películas...">
+                    <i class="fas fa-search"></i>
+                </div>
+            </header>
+
+            {% for genre in genres %}
+            <section class="movie-section">
+                <h2>{{ genre.name }}</h2>
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        {% for movie in genre.movies %}
+                        <div class="swiper-slide">
+                            <div class="movie-card">
+                                <img src="{{ movie.poster_url }}" alt="{{ movie.title }}">
+                                <div class="movie-info">
+                                    <h3>{{ movie.title }}</h3>
+                                    <div class="movie-rating">
+                                        <i class="fas fa-star"></i>
+                                        <span>{{ movie.rating }}/10</span>
+                                    </div>
+                                    <div class="movie-actions">
+                                        <button class="btn-favorite" data-movie-id="{{ movie.id }}">
+                                            <i class="fas fa-heart"></i>
+                                        </button>
+                                        <button class="btn-watchlist" data-movie-id="{{ movie.id }}">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </section>
+            {% endfor %}
+        </main>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+</body>
+</html> 

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Moderador - WatchLike</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/moderator.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h2>WatchLike</h2>
+                <span class="moderator-badge">Moderador</span>
+            </div>
+            <ul class="nav-links">
+                <li class="active">
+                    <a href="#"><i class="fas fa-shield-alt"></i> Panel Principal</a>
+                </li>
+                <li>
+                    <a href="#reportes"><i class="fas fa-flag"></i> Reportes
+                        <span class="badge">5</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#usuarios"><i class="fas fa-users"></i> Usuarios</a>
+                </li>
+                <li>
+                    <a href="#peliculas"><i class="fas fa-film"></i> Películas</a>
+                </li>
+                <li>
+                    <a href="#comentarios"><i class="fas fa-comments"></i> Comentarios</a>
+                </li>
+                <li>
+                    <a href="#estadisticas"><i class="fas fa-chart-bar"></i> Estadísticas</a>
+                </li>
+                <li class="logout">
+                    <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="content">
+            <header class="content-header">
+                <h1>Panel de Moderación</h1>
+                <div class="moderator-tools">
+                    <button class="tool-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </button>
+                    <button class="tool-btn">
+                        <i class="fas fa-envelope"></i>
+                        <span class="badge">2</span>
+                    </button>
+                </div>
+            </header>
+
+            <section class="quick-stats">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <div class="stat-info">
+                        <h3>Usuarios Activos</h3>
+                        <span>1,234</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-flag"></i>
+                    <div class="stat-info">
+                        <h3>Reportes Pendientes</h3>
+                        <span>5</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-comments"></i>
+                    <div class="stat-info">
+                        <h3>Nuevos Comentarios</h3>
+                        <span>28</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="recent-reports">
+                <h2>Reportes Recientes</h2>
+                <div class="reports-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Tipo</th>
+                                <th>Usuario</th>
+                                <th>Contenido</th>
+                                <th>Fecha</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for report in recent_reports %}
+                            <tr>
+                                <td>#{{ report.id }}</td>
+                                <td>
+                                    <span class="report-type {{ report.type }}">
+                                        {{ report.type }}
+                                    </span>
+                                </td>
+                                <td>{{ report.user }}</td>
+                                <td>{{ report.content }}</td>
+                                <td>{{ report.date }}</td>
+                                <td>
+                                    <button class="action-btn approve">
+                                        <i class="fas fa-check"></i>
+                                    </button>
+                                    <button class="action-btn reject">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/moderator.js') }}"></script>
+</body>
+</html> 

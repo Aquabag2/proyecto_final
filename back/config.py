@@ -4,7 +4,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Config:
-    # Asignación directa de valores
+
     SUPABASE_URL = "https://yhjkkqtnrddcmfodnukk.supabase.co"
     SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InloamtrcXRucmRkY21mb2RudWtrIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTczODM2NjM3NiwiZXhwIjoyMDUzOTQyMzc2fQ.kMNM6pDlpjarhQFrffH05sFH3O9OoRnjkm9BFpGbcIU"
-    SUPABASE_JWT_SECRET = "vSshJBceS2vZCnm4eg83rEuQ5Gtk/VPYdT6X4HYKAQkJIWoKY2cuM+BMRAHLbulEnYrkEpOXnTxXfDRV" 
+    SUPABASE_JWT_SECRET = "vSshJBceS2vZCnm4eg83rEuQ5Gtk/VPYdT6X4HYKAQkJIWoKY2cuM+BMRAHLbulEnYrkEpOXnTxXfDRV"
+    TMDB_API_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyYWE0MDZiZTFiZjUzZjJjMGJhYzU5NTRjNjI4ZDkwMiIsIm5iZiI6MTc0MDA5NjE0MC41LCJzdWIiOiI2N2I3YzI4Yzc0MzQyMDBjMjgyMjQ1M2IiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.9az9W9RBLxqILaZ8SWdBu_eWQsG-4fAavUL8hivdv6U" 
